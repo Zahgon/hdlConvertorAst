@@ -79,10 +79,7 @@ class HdlTypeBitsDef(iHdlTypeDef):
         self.states = 2
 
     def width(self):
-        if self.msb >= self.lsb:
-            return self.msb - self.lsb
-        else:
-            return self.lsb - self.msb
+        pass
 
     def __hash__(self):
         return hash((self.msb, self.lsb, self.signed, self.is_bigendian))

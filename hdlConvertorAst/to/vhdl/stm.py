@@ -185,133 +185,43 @@ class ToVhdl2008Stm(ToVhdl2008Expr):
         """
         :type o: HdlStmCase
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.type != HdlStmCaseType.CASE:
-            raise NotImplementedError()
-        if o.uniq_constrain is not None:
-            raise NotImplementedError()
-        w("CASE ")
-        self.visit_iHdlExpr(o.switch_on)
-        w(" IS\n")
-        with Indent(self.out):
-            cases = o.cases
-            for k, stms in cases:
-                w("WHEN ")
-                self.visit_iHdlExpr(k)
-                w(" =>")
-                is_block = self.visit_HdlStmBlock(stms, begin_end=False)
-                if is_block:
-                    w("\n")
-            defal = o.default
-            if defal is not None:
-                is_block = w("WHEN OTHERS =>")
-                self.visit_HdlStmBlock(defal, begin_end=False)
-                if is_block:
-                    w("\n")
-        w("END CASE;\n")
+        pass
 
     def visit_HdlStmReturn(self, o):
         """
         :type o: HdlStmReturn
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("RETURN")
-        if o.val is not None:
-            w(" ")
-            self.visit_iHdlExpr(o.val)
-        w(";\n")
+        pass
 
     def visit_HdlStmContinue(self, o):
         """
         :type o: HdlStmContinue
         """
-        self.visit_doc(o)
-        self.out.write("CONTINUE;\n")
+        pass
 
     def visit_HdlStmBreak(self, o):
         """
         :type o: HdlStmBreak
         """
-        self.visit_doc(o)
-        self.out.write("BREAK;\n")
+        pass
 
     def visit_HdlStmFor(self, o):
         """
         :type o: HdlStmFor
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("FOR ")
-        self.visit_iHdlExpr(o.params[0])
-        w(" IN ")
-        self.visit_iHdlExpr(o.params[1])
-        w(" LOOP\n")
-        with Indent(self.out):
-            for b in o.body:
-                self.visit_iHdlStatement(b)
-        w("END FOR;\n")
+        pass
 
     def visit_HdlStmForIn(self, o):
         """
         :type o: HdlStmForIn
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.labels:
-            w(o.labels[0])
-            w(": ")
-        w("FOR ")
-        assert len(o.var_defs) == 1, o.var_defs
-        self.visit_iHdlExpr(o.var_defs[0])
-        w(" IN ")
-        self.visit_iHdlExpr(o.collection)
-        if o.in_preproc:
-            w(" GENERATE\n")
-        else:
-            w(" LOOP\n")
-        with Indent(self.out):
-            if o.in_preproc:
-                has_begin_end = self.visit_iHdlObj(o.body)
-            else:
-                if isinstance(o.body, HdlStmBlock):
-                    for _stm in o.body.body:
-                        self.visit_iHdlObj(_stm)
-                else:
-                    self.visit_iHdlObj(o.body)
-
-        if o.in_preproc:
-            if has_begin_end:
-                w(" GENERATE;\n")
-            else:
-                w("\n")
-                w("END GENERATE;\n")
-        else:
-            w("END LOOP;\n")
+        pass
 
     def visit_HdlStmWait(self, o):
         """
         :type o: HdlStmWait
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("WAIT")
-        for e in o.val:
-            if isinstance(e, HdlOp) and e.fn == HdlOpType.MUL:
-                # wait for time
-                w(" FOR ")
-                self.visit_iHdlExpr(e.ops[0])
-                w(" ")
-                self.visit_iHdlExpr(e.ops[1])
-            # elif :
-            #  wait until
-            else:
-                # wait on event
-                w(" ON ")
-                self.visit_iHdlExpr(e)
-
-        w(";\n")
+        pass
 
     def visit_HdlStmThrow(self, o):
         """
@@ -331,17 +241,5 @@ class ToVhdl2008Stm(ToVhdl2008Expr):
         :type o: HdlStmWhile
         :note: vhdl loop statement
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.labels:
-            w(o.labels[0])
-            w(": ")
-        w("LOOP\n")
-        with Indent(self.out):
-            if not o.in_preproc and isinstance(o.body, HdlStmBlock):
-                for _stm in o.body.body:
-                    self.visit_iHdlObj(_stm)
-            else:
-                self.visit_iHdlObj(o.body)
-        w("END LOOP;\n")
+        pass
 

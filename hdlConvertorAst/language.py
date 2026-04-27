@@ -27,21 +27,10 @@ class Language(Enum):
     HWT = "hwt"
 
     def is_vhdl(self):
-        return self in [Language.VHDL_2002,
-                        Language.VHDL_2008]
+        pass
 
     def is_verilog(self):
-        return self in (
-            Language.VERILOG_1995,
-            Language.VERILOG_2001,
-            Language.VERILOG_2001_NOCONFIG,
-            Language.VERILOG_2005
-        )
+        pass
 
     def is_system_verilog(self):
-        return self in (
-            Language.SYSTEM_VERILOG_2005,
-            Language.SYSTEM_VERILOG_2009,
-            Language.SYSTEM_VERILOG_2012,
-            Language.SYSTEM_VERILOG_2017
-        )
+        pass

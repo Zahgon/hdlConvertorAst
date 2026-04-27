@@ -85,14 +85,7 @@ class ToHwt(ToHwtStm):
             return super(ToHwt, self).visit_doc(obj, "#")
 
     def add_module_exampe_serialization(self, module_name):
-        w = self.out.write
-        w('if __name__ == "__main__":\n')
-        with Indent(self.out):
-            w("from hwt.synth import to_rtl_str\n")
-            w("m = ")
-            w(module_name)
-            w("()\n")
-            w("print(to_rtl_str(m))\n")
+        pass
 
     def ivars_to_local_vars(self, var_names):
         if var_names:

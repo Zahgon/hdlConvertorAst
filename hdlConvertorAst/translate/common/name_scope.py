@@ -265,15 +265,7 @@ class NameScope(dict):
         """
         :return: str
         """
-        assert obj is not None
-        actual = self
-        while actual is not None:
-            n = actual.reversed.get(obj, None)
-            if n is not None:
-                return n
-            actual = actual.parent
-
-        raise ObjectForNameNotFound(obj)
+        pass
 
 
 class WithNameScope():

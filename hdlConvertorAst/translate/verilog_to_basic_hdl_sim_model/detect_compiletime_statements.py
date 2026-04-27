@@ -27,10 +27,7 @@ class DetectCompileTimeStatements(HdlAstVisitor):
         """
         :type o: HdlStmCase
         """
-        if not o.in_preproc:
-            o.in_preproc = all_ids_constant(o.switch_on)
-
-        return HdlAstVisitor.visit_HdlStmCase(self, o)
+        pass
 
     def visit_iHdlExpr(self, o):
         """

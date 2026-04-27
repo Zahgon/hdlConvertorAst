@@ -259,36 +259,7 @@ class ToVerilog2005Stm(ToVerilog2005Expr):
 
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.uniq_constrain is not None:
-            w(o.uniq_constrain.name.lower())
-            w(" ")
-
-        w(o.type.name.lower())
-        w("(")
-        self.visit_iHdlExpr(o.switch_on)
-        w(")\n")
-        with Indent(self.out):
-            cases = o.cases
-            for k, stms in cases:
-                self.visit_iHdlExpr(k)
-                w(":")
-                need_semi = self.visit_iHdlStatement_in_statement(stms)
-                if need_semi:
-                    w(";\n")
-                else:
-                    w("\n")
-            defal = o.default
-            if defal is not None:
-                w("default:")
-                need_semi = self.visit_iHdlStatement_in_statement(defal)
-                if need_semi:
-                    w(";\n")
-                else:
-                    w("\n")
-        w("endcase")
-        return False
+        pass
 
     def visit_HdlStmWait(self, o):
         """
@@ -296,12 +267,7 @@ class ToVerilog2005Stm(ToVerilog2005Expr):
 
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("#")
-        assert len(o.val) == 1, o.val
-        self.visit_iHdlExpr(o.val[0])
-        return True
+        pass
 
     def visit_HdlStmFor(self, o):
         """
@@ -309,113 +275,46 @@ class ToVerilog2005Stm(ToVerilog2005Expr):
 
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.in_preproc:
-            w("generate ")
-
-        w("for (")
-        if isinstance(o.init, HdlStmBlock):
-            init_stms = o.init.body
-        else:
-            init_stms = [o.init, ]
-
-        trnt = self._type_requires_nettype
-        in_in_loop_spec = self.is_in_loop_spec
-        try:
-            self._type_requires_nettype = False
-            self.is_in_loop_spec = True
-            for is_last, stm in iter_with_last(init_stms):
-                self.visit_iHdlStatement(stm)
-                if not is_last:
-                    w(", ")
-        finally:
-            self.is_in_loop_spec = in_in_loop_spec
-            self._type_requires_nettype = trnt
-
-        w("; ")
-        self.visit_iHdlExpr(o.cond)
-        w("; ")
-        if isinstance(o.step, HdlStmBlock):
-            step_stms = o.step.body
-        else:
-            step_stms = [o.step, ]
-
-        for is_last, stm in iter_with_last(step_stms):
-            self.visit_iHdlStatement(stm)
-            if not is_last:
-                w(", ")
-        w(")")
-        need_semi = self.visit_iHdlStatement_in_statement(o.body)
-        if o.in_preproc:
-            if need_semi:
-                w(";\n")
-            else:
-                w("\n")
-            w("endgenerate")
-            return False
-        else:
-            return need_semi
+        pass
 
     def visit_HdlStmForIn(self, o):
         """
         :type o: HdlStmForIn
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        raise NotImplementedError()
+        pass
 
     def visit_HdlStmWhile(self, o):
         """
         :type o: HdlStmWhile
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("while (")
-        self.visit_iHdlExpr(o.cond)
-        w(") ")
-        return self.visit_iHdlStatement(o.body)
+        pass
 
     def visit_HdlStmRepeat(self, o):
         """
         :type o: HdlStmRepeat
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("repeat (")
-        self.visit_iHdlExpr(o.n)
-        w(") ")
-        return self.visit_iHdlStatement(o.body)
+        pass
 
     def visit_HdlStmReturn(self, o):
         """
         :type o: HdlStmReturn
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("return")
-        if o.val is not None:
-            w(" ")
-            self.visit_iHdlExpr(o.val)
-        return True
+        pass
 
     def visit_HdlStmContinue(self, o):
         """
         :type o: HdlStmContinue
         """
-        self.visit_doc(o)
-        self.out.write("continue")
-        return True
+        pass
 
     def visit_HdlStmBreak(self, o):
         """
         :type o: HdlStmBreak
         """
-        self.visit_doc(o)
-        self.out.write("break")
-        return True
+        pass
 
     def visit_HdlStmThrow(self, o):
         """
@@ -428,12 +327,4 @@ class ToVerilog2005Stm(ToVerilog2005Expr):
         """
         :type o: HdlImport
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("import ")
-        package, name = o.path
-        self.visit_iHdlExpr(package)
-        w("::")
-        self.visit_iHdlExpr(name)
-
-        return True
+        pass

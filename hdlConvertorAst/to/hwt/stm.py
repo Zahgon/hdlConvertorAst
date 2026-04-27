@@ -123,104 +123,37 @@ class ToHwtStm(ToHwtExpr):
         """
         :type o: HdlStmCase
         """
-        self.visit_doc(o)
-        if o.uniq_constrain is not None:
-            raise NotImplementedError()
-        w = self.out.write
-        if o.in_preproc:
-            assert o.cases
-            first = True
-            for c, stm in o.cases:
-                if first:
-                    w("if ")
-                    first = False
-                else:
-                    w("elif ")
-                self.visit_iHdlExpr(o.switch_on)
-                w(" == ")
-                self.visit_iHdlExpr(c)
-                w(":\n")
-                with Indent(self.out):
-                    self.visit_iHdlStatement(stm)
-                w("\n")
-
-            if o.default is not None:
-                w("else:\n")
-                with Indent(self.out):
-                    self.visit_iHdlStatement(o.default)
-
-        else:
-            # if o.type != HdlStmCaseType.CASE:
-            #    raise NotImplementedError(o.type)
-            w("Switch(")
-            self.visit_iHdlExpr(o.switch_on)
-            w(")")
-            with Indent(self.out):
-                for c, stm in o.cases:
-                    w("\\\n")
-                    w(".Case(")
-                    self.visit_iHdlExpr(c)
-                    w(",\n")
-                    with Indent(self.out):
-                        self.visit_iHdlStatement(stm)
-                    w(")")
-                if o.default is not None:
-                    w("\\\n")
-                    w(".Default(\n")
-                    with Indent(self.out):
-                        self.visit_iHdlStatement(o.default)
-                        w(")")
+        pass
 
     def visit_HdlStmFor(self, o):
         """
         :type o: HdlStmFor
         """
-        if not o.in_preproc:
-            raise TypeError("does not support HdlStmFor", self, o)
-        self.visit_doc(o)
-        w = self.out.write
-        # [todo] if is a simple for in range()
-
-        self.visit_iHdlObj(o.init)
-        w("\n")
-        w("while ")
-        self.visit_iHdlExpr(o.cond)
-        w(":\n")
-        with Indent(self.out):
-            self.visit_iHdlObj(o.body)
+        pass
 
     def visit_HdlStmWhile(self, o):
         """
         :type o: HdlStmWhile
         """
-        self.visit_doc(o)
-        assert o.in_preproc
-        w = self.out.write
-        w("while ")
-        self.visit_iHdlExpr(o.cond)
-        w(":\n")
-        with Indent(self.out):
-            self.visit_iHdlObj(o.body)
+        pass
 
     def visit_HdlStmBreak(self, o):
         """
         :type o: HdlStmBreak
         """
-        assert o.in_preproc, o
-        self.out.write("break")
+        pass
     
     def visit_HdlStmContinue(self, o):
         """
         :type o: HdlStmContinue
         """
-        assert o.in_preproc, o
-        self.out.write("continue")
+        pass
     
     def visit_HdlStmThrow(self, o):
-        ToBasicHdlSimModel.visit_HdlStmThrow(self, o)
+        pass
 
     def visit_HdlStmWait(self, o):
-        ToBasicHdlSimModel.visit_HdlStmWait(self, o)
+        pass
 
     def visit_HdlStmNop(self, o):
         ToBasicHdlSimModel.visit_HdlStmNop(self, o)

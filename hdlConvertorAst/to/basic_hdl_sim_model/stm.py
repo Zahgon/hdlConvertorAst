@@ -109,23 +109,13 @@ class ToBasicHdlSimModelStm(ToBasicHdlSimModelExpr):
         """
         :type o: HdlStmThrow
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("raise")
-        if o.val is not None:
-            w(" ")
-            self.visit_iHdlExpr(o.val)
-        w("\n")
+        pass
 
     def visit_HdlStmWait(self, o):
         """
         :type o: HdlStmWait
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("yield Timer(")
-        self.visit_iHdlExpr(o.val)
-        w(")")
+        pass
 
     def visit_HdlStmNop(self, o):
         """

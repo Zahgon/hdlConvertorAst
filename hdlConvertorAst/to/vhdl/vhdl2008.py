@@ -375,24 +375,13 @@ class ToVhdl2008(ToVhdl2008Stm):
         """
         :type o: HdlLibrary
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("LIBRARY ")
-        w(o.name)
-        w(";\n")
+        pass
 
     def visit_HdlImport(self, o):
         """
         :type o: HdlImport
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("USE ")
-        for last, p in iter_with_last(o.path):
-            self.visit_iHdlExpr(p)
-            if not last:
-                w(".")
-        w(";\n")
+        pass
 
     def visit_HdlValueIdspace(self, o):
         """

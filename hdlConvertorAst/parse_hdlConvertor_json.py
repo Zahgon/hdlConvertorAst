@@ -122,8 +122,7 @@ def parse_hdlConvertor_json(j):
 
 
 def parse_hdlConvertor_json_str(j_str):
-    j = json.loads(j_str)
-    return parse_hdlConvertor_json(j)
+    pass
 
 
 def parse_hdlConvertor_json_file(file_name):

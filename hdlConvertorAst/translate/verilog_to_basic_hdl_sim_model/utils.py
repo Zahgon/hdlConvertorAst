@@ -64,7 +64,7 @@ def hdl_or(*args):
 
 
 def hdl_downto(msb, lsb):
-    return HdlOp(HdlOpType.DOWNTO, [msb, lsb])
+    pass
 
 
 def hdl_map_asoc(o1, o2):
@@ -73,7 +73,7 @@ def hdl_map_asoc(o1, o2):
     :type o2: iHdlExpr
     :return: HdlOp
     """
-    return HdlOp(HdlOpType.MAP_ASSOCIATION, [o1, o2])
+    pass
 
 
 def hdl_add_int(a, b):

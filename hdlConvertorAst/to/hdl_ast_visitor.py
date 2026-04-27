@@ -48,13 +48,13 @@ class HdlAstVisitor(object):
         """
         :type o: HdlImport
         """
-        return o
+        pass
 
     def visit_HdlLibrary(self, o):
         """
         :type o: HdlLibrary
         """
-        return o
+        pass
 
     def visit_HdlValueIdspace(self, o):
         """
@@ -239,22 +239,13 @@ class HdlAstVisitor(object):
         """
         :type o: HdlStmCase
         """
-        self.visit_doc(o)
-        self.visit_iHdlExpr(o.switch_on)
-        for c, stm in o.cases:
-            self.visit_iHdlExpr(c)
-            self.visit_iHdlStatement(stm)
-        if o.default is not None:
-            self.visit_iHdlStatement(o.default)
-        return o
+        pass
 
     def visit_HdlStmWait(self, o):
         """
         :type o: HdlStmWait
         """
-        self.visit_doc(o)
-        self.visit_iHdlExpr(o.val)
-        return o
+        pass
 
     def visit_HdlStmIf(self, o):
         """
@@ -275,57 +266,37 @@ class HdlAstVisitor(object):
         """
         :type o: HdlStmFor
         """
-        self.visit_doc(o)
-        self.visit_iHdlStatement(o.init)
-        self.visit_iHdlExpr(o.cond)
-        self.visit_iHdlStatement(o.step)
-        self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmForIn(self, o):
         """
         :type o: HdlStmForIn
         """
-        self.visit_doc(o)
-        for v in o.var_defs:
-            self.visit_main_obj(v)
-        self.visit_iHdlExpr(o.collection)
-        self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmWhile(self, o):
         """
         :type o: HdlStmWhile
         """
-        self.visit_doc(o)
-        self.visit_iHdlExpr(o.cond)
-        self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmRepeat(self, o):
         """
         :type o: HdlStmRepeat
         """
-        self.visit_doc(o)
-        self.visit_iHdlExpr(o.n)
-        self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmReturn(self, o):
         """
         :type o: HdlStmReturn
         """
-        self.visit_doc(o)
-        if o.val is not None:
-            self.visit_iHdlExpr(o.val)
-        return o
+        pass
 
     def visit_HdlStmBreak(self, o):
         """
         :type o: HdlStmBreak
         """
-        self.visit_doc(o)
-        return o
+        pass
 
     def visit_HdlStmNop(self, o):
         """
@@ -338,16 +309,13 @@ class HdlAstVisitor(object):
         """
         :type o: HdlStmContinue
         """
-        self.visit_doc(o)
-        return o
+        pass
 
     def visit_HdlStmThrow(self, o):
         """
         :type o: HdlStmThrow
         """
-        self.visit_doc(o)
-        self.visit_iHdlExpr(o.val)
-        return o
+        pass
 
     def visit_HdlStmAssign(self, o):
         """

@@ -84,55 +84,19 @@ class ToSystemcStm(ToSystemcExpr):
 
         :return: True if requires ;\\n after end
         """
-        self.visit_doc(o)
-        w = self.out.write
-        if o.type != HdlStmCaseType.CASE:
-            raise NotImplementedError()
-        if o.uniq_constrain is not None:
-            raise NotImplementedError()
-        w("switch(")
-        self.visit_iHdlExpr(o.switch_on)
-        w(") {\n")
-        cases = o.cases
-        for k, stms in cases:
-            w("case ")
-            self.visit_iHdlExpr(k)
-            w(":")
-            with Indent(self.out):
-                need_semi = self.visit_iHdlStatement_in_statement(stms)
-                if need_semi:
-                    w(";\n")
-                else:
-                    w("\n")
-        defal = o.default
-        if defal is not None:
-            w("default:")
-            with Indent(self.out):
-                need_semi = self.visit_iHdlStatement_in_statement(defal)
-                if need_semi:
-                    w(";\n")
-                else:
-                    w("\n")
-        w("}")
-        return False
+        pass
 
     def visit_HdlStmReturn(self, o):
-        return method_as_function(ToVerilog2005Stm.visit_HdlStmReturn)(self, o)
+        pass
 
     def visit_HdlStmContinue(self, o):
-        return method_as_function(ToVerilog2005Stm.visit_HdlStmContinue)(self, o)
+        pass
 
     def visit_HdlStmBreak(self, o):
-        return method_as_function(ToVerilog2005Stm.visit_HdlStmBreak)(self, o)
+        pass
 
     def visit_HdlStmThrow(self, o):
         """
         :type o: HdlStmThrow
         """
-        self.visit_doc(o)
-        w = self.out.write
-        w("throw")
-        if o.val is not None:
-            w(" ")
-            self.visit_iHdlExpr(o.val)
-        w(";\n")
+        pass

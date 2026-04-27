@@ -177,25 +177,13 @@ class HdlAstModifier(HdlAstVisitor):
         """
         :type o: HdlStmCase
         """
-        self.visit_doc(o)
-        o.switch_on = self.visit_iHdlExpr(o.switch_on)
-        cases = o.cases
-        for i, (c, stm) in enumerate(cases):
-            new_c = self.visit_iHdlExpr(c)
-            new_stm = self.visit_iHdlStatement(stm)
-            cases[i] = (new_c, new_stm)
-
-        if o.default is not None:
-            o.default = self.visit_iHdlStatement(o.default)
-        return o
+        pass
 
     def visit_HdlStmWait(self, o):
         """
         :type o: HdlStmWait
         """
-        self.visit_doc(o)
-        o.val = self.visit_iHdlExpr(o.val)
-        return o
+        pass
 
     def visit_HdlStmIf(self, o):
         """
@@ -219,49 +207,31 @@ class HdlAstModifier(HdlAstVisitor):
         """
         :type o: HdlStmFor
         """
-        self.visit_doc(o)
-        o.init = self.visit_iHdlStatement(o.init)
-        o.cond = self.visit_iHdlExpr(o.cond)
-        o.step = self.visit_iHdlStatement(o.step)
-        o.body = self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmForIn(self, o):
         """
         :type o: HdlStmForIn
         """
-        self.visit_doc(o)
-        self.visit_iHdlObj_list(o.var_defs, self.visit_main_obj)
-        o.collection = self.visit_iHdlExpr(o.collection)
-        o.body = self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmWhile(self, o):
         """
         :type o: HdlStmWhile
         """
-        self.visit_doc(o)
-        o.cond = self.visit_iHdlExpr(o.cond)
-        o.body = self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmRepeat(self, o):
         """
         :type o: HdlStmRepeat
         """
-        self.visit_doc(o)
-        o.n = self.visit_iHdlExpr(o.n)
-        o.body = self.visit_iHdlStatement(o.body)
-        return o
+        pass
 
     def visit_HdlStmReturn(self, o):
         """
         :type o: HdlStmReturn
         """
-        self.visit_doc(o)
-        if o.val is not None:
-            o.val = self.visit_iHdlExpr(o.val)
-        return o
+        pass
 
     def visit_HdlStmAssign(self, o):
         """

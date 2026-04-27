@@ -21,7 +21,7 @@ class ToJson(HdlAstVisitor):
         """
         :type o: HdlLibrary
         """
-        return self.visit_iHdlObjWithName(o)
+        pass
 
     def visit_iHdlObjWithName(self, o):
         """
@@ -62,9 +62,7 @@ class ToJson(HdlAstVisitor):
         """
         :type o: HdlImport
         """
-        d = self.visit_iHdlObj(o)
-        d["path"] = self.visit_iHdlExpr(o.path)
-        return d
+        pass
 
     def visit_HdlValueIdspace(self, o):
         """
@@ -239,63 +237,37 @@ class ToJson(HdlAstVisitor):
 
         :return: True if requires ;\\n after end
         """
-        d = self._visit_iHdlStatement(o)
-        d["type"] = o.type.name
-        d["switch_on"] = self.visit_iHdlExpr(o.switch_on)
-        d["cases"] = [
-            [self.visit_iHdlExpr(c), self.visit_iHdlStatement(stm)]
-            for c, stm in o.cases
-        ]
-        if o.default is not None:
-            d["default"] = self.visit_iHdlStatement(o.default)
-        return d
+        pass
 
     def visit_HdlStmWait(self, o):
         """
         :type o: HdlStmWait
         """
-        d = self._visit_iHdlStatement(o)
-        d["val"] = self.visit_iHdlExpr(o.val)
-        return d
+        pass
 
     def visit_HdlStmFor(self, o):
         """
         :type o: HdlStmFor
         """
-        d = self._visit_iHdlStatement(o)
-        d["init"] = self.visit_iHdlStatement(o.init)
-        d["cond"] = self.visit_iHdlExpr(o.cond)
-        d["step"] = self.visit_iHdlStatement(o.step)
-        d["body"] = self.visit_iHdlStatement(o.body)
-        return d
+        pass
 
     def visit_HdlStmForIn(self, o):
         """
         :type o: HdlStmForIn
         """
-        d = self._visit_iHdlStatement(o)
-        d["var_defs"] = [self.visit_main_obj(o2) for o2 in o.var_defs]
-        d["collection"] = self.visit_iHdlExpr(o.collection)
-        d["body"] = self.visit_iHdlStatement(o.body)
-        return d
+        pass
 
     def visit_HdlStmWhile(self, o):
         """
         :type o: HdlStmWhile
         """
-        d = self._visit_iHdlStatement(o)
-        d["cond"] = self.visit_iHdlExpr(o.cond)
-        d["body"] = self.visit_iHdlStatement(o.body)
-        return d
+        pass
 
     def visit_HdlStmRepeat(self, o):
         """
         :type o: HdlStmRepeat
         """
-        d = self._visit_iHdlStatement(o)
-        d["n"] = self.visit_iHdlExpr(o.n)
-        d["body"] = self.visit_iHdlStatement(o.body)
-        return d
+        pass
 
     def visit_HdlStmAssign(self, o):
         """
@@ -315,31 +287,25 @@ class ToJson(HdlAstVisitor):
         """
         :type o: HdlStmReturn
         """
-        d = self._visit_iHdlStatement(o)
-        if o.val is not None:
-            d["val"] = self.visit_iHdlExpr(o.val)
-        return d
+        pass
 
     def visit_HdlStmContinue(self, o):
         """
         :type o: HdlStmContinue
         """
-        return self._visit_iHdlStatement(o)
+        pass
 
     def visit_HdlStmBreak(self, o):
         """
         :type o: HdlStmBreak
         """
-        return self._visit_iHdlStatement(o)
+        pass
 
     def visit_HdlStmThrow(self, o):
         """
         :type o: HdlStmThrow
         """
-        d = self._visit_iHdlStatement(o)
-        if o.val is not None:
-            d["val"] = self.visit_iHdlExpr(o.val)
-        return d
+        pass
 
     def visit_HdlStmNop(self, o):
         """
